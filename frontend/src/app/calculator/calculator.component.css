@@ -1,0 +1,32 @@
+.main-panel{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.calculator{
+    width:350px;
+    height: 500px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: auto;
+    padding: 5px;
+}
+
+
+.calculator .header , .calculator .buttons {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.calculator .header{
+    height: 20%;
+
+}
+
+.calculator .buttons{
+    height: 80%;
+}
+

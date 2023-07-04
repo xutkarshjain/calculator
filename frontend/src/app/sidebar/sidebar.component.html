@@ -1,1 +1,11 @@
-<p>sidebar works!</p>
+<div class="sidebar"  [ngClass]="{ 'collapsed': sidebarCollapsed}">
+    <div class="header">
+        <span class="heading"  [ngClass]="{ 'collapsed': sidebarCollapsed}">Calculator</span> 
+        <span class="hamburger" (click)="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </span>
+    </div>
+    <div class="body">
+        <app-history [sidebarCollapsed]="sidebarCollapsed"></app-history>
+    </div>
+</div>
