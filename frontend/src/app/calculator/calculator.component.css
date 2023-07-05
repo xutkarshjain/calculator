@@ -13,6 +13,7 @@
     border-radius: 5px;
     margin: auto;
     padding: 5px;
+    background: #add8e682;
 }
 
 
@@ -22,11 +23,96 @@
 }
 
 .calculator .header{
-    height: 20%;
+    height: 25%;
+    padding:2px;
+    background: #ffffffa1;
 
 }
 
 .calculator .buttons{
-    height: 80%;
+        margin-top: 5px;
+    height: calc(75% - 5px);
 }
 
+.containerr {
+  height: 4rem;
+  overflow-y: auto;
+  border-bottom: 1px solid lightgray;
+}
+
+.equation {
+  margin: 0;
+  font-size: 1.3rem;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: right;
+  outline: none;
+}
+
+
+/* Hide the scrollbar for Firefox */
+.containerr::-webkit-scrollbar , .result::-webkit-scrollbar{
+    width: 0.1em;
+    background-color: transparent;
+  }
+  
+  .containerr::-webkit-scrollbar-thumb, .result::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  /* Hide the scrollbar for Chrome, Safari, and Edge */
+  .containerr::-moz-scrollbar , .result::-moz-scrollbar{
+    width: 0.1em;
+    background-color: transparent;
+  }
+  
+  .containerr::-moz-scrollbar-thumb ,.result::-moz-scrollbar-thumb{
+    background-color: transparent;
+  }
+  
+  
+
+.equation , .result{
+    font-weight: 500;
+    font-size: larger;
+}
+
+
+.result{
+    font-size: xx-large;
+    overflow-x: auto;
+    text-align: right;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;   
+}
+
+.buttons{
+  display: flex;
+  padding:10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.calculator-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 2px 1px 2px rgb(173 216 230);
+  font-weight: 500;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: lightblue;
+  background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+}
+
+.calculator-key:hover {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}

@@ -1,6 +1,58 @@
 <div class="main-panel">
-    <div class="calculator">
-        <div class="header"></div>
-        <div class="buttons"></div>
+  <div class="calculator">
+    <div class="header">
+      <div class="containerr">
+        <div
+          class="equation"
+          #editableDiv
+          contenteditable="true"
+          (keydown)="validateInput($event)"
+        >
+          0
+        </div>
+      </div>
+      <div class="result">{{ result }}</div>
     </div>
+    <div class="buttons">
+      <div class="calculator-key" (click)="handleKeyPress('AC')">AC</div>
+      <div class="calculator-key" (click)="handleKeyPress('Backspace')">
+        <i class="bi bi-backspace-fill"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('%')">
+        <i class="bi bi-percent"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('/')">
+        <i class="bi bi-slash-lg"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('7')">7</div>
+      <div class="calculator-key" (click)="handleKeyPress('8')">8</div>
+      <div class="calculator-key" (click)="handleKeyPress('9')">9</div>
+      <div class="calculator-key" (click)="handleKeyPress('*')">
+        <i class="bi bi-x-lg"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('4')">4</div>
+      <div class="calculator-key" (click)="handleKeyPress('5')">5</div>
+      <div class="calculator-key" (click)="handleKeyPress('6')">6</div>
+      <div class="calculator-key" (click)="handleKeyPress('-')">
+        <i class="bi bi-dash-lg"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('1')">1</div>
+      <div class="calculator-key" (click)="handleKeyPress('2')">2</div>
+      <div class="calculator-key" (click)="handleKeyPress('3')">3</div>
+      <div class="calculator-key" (click)="handleKeyPress('+')">
+        <i class="bi bi-plus-lg"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('.')">
+        <i class="bi bi-dot"></i>
+      </div>
+      <div class="calculator-key" (click)="handleKeyPress('0')">0</div>
+      <div
+        class="calculator-key"
+        (click)="handleKeyPress('Enter')"
+        style="width: 120px; border-radius: 150px; font-size: 23px"
+      >
+        =
+      </div>
+    </div>
+  </div>
 </div>
