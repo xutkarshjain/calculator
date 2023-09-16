@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-history',
@@ -7,15 +8,22 @@ import { Component, Input } from '@angular/core';
 })
 export class HistoryComponent {
   @Input() sidebarCollapsed!:boolean;
-  public historyItems:any =[
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12+12/3*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"},
-    {"equation":"12*20*90+2/2" , "result": "2753"}
-  ]
+  historyItems:any =[]
+
+  constructor(private localStorageService:LocalStorageService){}
+
+  ngOnInit(){
+    this.historyItems = this.getAllHistoryData()
+
+    this.localStorageService.observe('history').subscribe((newValue) => {
+      this.historyItems = newValue
+    })
+  }
+  
+  getAllHistoryData(){
+    if (this.localStorageService.retrieve('history')){
+      return this.localStorageService.retrieve('history')
+    }
+  }
+  
 }

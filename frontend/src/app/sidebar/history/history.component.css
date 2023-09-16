@@ -44,3 +44,14 @@
   padding: 5px;
   text-align: right;
 }
+
+.noHistoryContainer{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.equation,.result{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

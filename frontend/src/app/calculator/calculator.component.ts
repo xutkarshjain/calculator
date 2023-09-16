@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import * as math from 'mathjs';
+import { LocalStorageService } from 'ngx-webstorage';
+
 
 @Component({
   selector: 'app-calculator',
@@ -12,7 +14,7 @@ export class CalculatorComponent {
   result:string = "0"
   @ViewChild('editableDiv') editableDivRef!: ElementRef;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef,private localStorageService:LocalStorageService) {}
 
   ngOnInit() {
     this.registerPasteEvent();
@@ -37,7 +39,11 @@ export class CalculatorComponent {
 
   calculateEquation(equation:string) {
     try {
-      const value = math.evaluate(equation);
+      let value = math.evaluate(equation);
+      value = value.toString()
+      if (this.equation != value){
+        this.addToLocalStorage(this.equation,value)
+      }
       return value.toString();
     } catch (error) {
       this.result = 'Syntax Error!';
@@ -114,6 +120,26 @@ export class CalculatorComponent {
       editableDiv.innerText += key;
     }
   }
-  
+
+
+  addToLocalStorage(equation:string,result:string){
+    let value = this.localStorageService.retrieve('history') || []
+    let itemToInsert:any = { equation:equation, result:result }
+
+    //refusing push if itemToInsert already exists in history/value
+    const foundIndex = value.findIndex((obj:any, index:number) => {
+      if (JSON.stringify(obj) === JSON.stringify(itemToInsert)) {
+        return true;
+      }
+      return false;
+    });
+
+    if (foundIndex == -1) {
+      value.unshift(itemToInsert)
+      this.localStorageService.store('history',value)
+    }
+    
+  }
+    
 
 }

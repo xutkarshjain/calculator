@@ -1,9 +1,17 @@
 <div class="container" [ngClass]="{'collapsed':sidebarCollapsed}">
-    <div class="history" *ngFor="let historyItem of historyItems" >
-        <div class="record"  >
-            <h6 class="equation">{{historyItem.equation}}</h6>
-            <h3 class="result">={{historyItem.result}}</h3>
+    <div *ngIf="historyItems && historyItems.length; else noRecordFound">
+        <div class="history" *ngFor="let historyItem of historyItems" >
+            <div class="record"  >
+                <h6 class="equation">{{historyItem.equation}}</h6>
+                <h3 class="result">={{historyItem.result}}</h3>
+            </div>
         </div>
     </div>
+    <ng-template #noRecordFound>
+        <div class="noHistoryContainer">
+            No History Data
+        </div>
+    </ng-template>
+    
 </div>
 
