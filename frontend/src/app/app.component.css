@@ -1,4 +1,17 @@
-.header{
-    text-align: center;
-    font-family: 'Open Sans', Arial, sans-serif;
+.container{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+.sidebar{
+    height: 100vh;
+}
+
+.mainPanel{
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 0 50px;
+    padding: 0;
 }

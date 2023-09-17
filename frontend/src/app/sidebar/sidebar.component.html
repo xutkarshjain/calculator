@@ -1,1 +1,17 @@
-<p>sidebar works!</p>
+<div class="sidebar"  [ngClass]="{ 'collapsed': sidebarCollapsed}">
+    <div class="header">
+        <span class="heading"  [ngClass]="{ 'collapsed': sidebarCollapsed}">
+            History
+            <span class="clear-history" title="Clear" (click)="clearHistory()">
+                <i class="bi bi-trash3-fill"></i>
+            </span> 
+            
+        </span> 
+        <span class="hamburger" (click)="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </span>
+    </div>
+    <div class="body">
+        <app-history [sidebarCollapsed]="sidebarCollapsed"></app-history>
+    </div>
+</div>

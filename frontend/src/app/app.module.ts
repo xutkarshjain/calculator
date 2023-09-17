@@ -7,6 +7,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { ThemeComponent } from './theme/theme.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HistoryComponent } from './sidebar/history/history.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HistoryComponent } from './sidebar/history/history.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
