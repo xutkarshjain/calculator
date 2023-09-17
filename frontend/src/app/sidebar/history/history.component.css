@@ -45,6 +45,10 @@
   text-align: right;
 }
 
+.history .record:hover{
+  box-shadow: 3px 6px 9px 0px lightblue;
+}
+
 .noHistoryContainer{
   text-align: center;
   margin-top: 30px;

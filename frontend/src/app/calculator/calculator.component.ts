@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import * as math from 'mathjs';
 import { LocalStorageService } from 'ngx-webstorage';
-
+import { SharedDetailsService } from '../shared-details.service';
 
 @Component({
   selector: 'app-calculator',
@@ -12,12 +12,23 @@ export class CalculatorComponent {
 
   equation:string ="0"
   result:string = "0"
+  editHistoryMode:boolean = false
+  itemToRemoved:any = {}
   @ViewChild('editableDiv') editableDivRef!: ElementRef;
 
-  constructor(private elementRef: ElementRef,private localStorageService:LocalStorageService) {}
+  constructor(private elementRef: ElementRef,private localStorageService:LocalStorageService, private sharedDetailsService:SharedDetailsService) {}
 
   ngOnInit() {
     this.registerPasteEvent();
+    this.sharedDetailsService.itemToUpdate$.subscribe((itemToUpdate)=>{
+      if (itemToUpdate){
+        this.itemToRemoved = itemToUpdate
+        this.editHistoryMode = true
+        this.result = itemToUpdate.result
+        const editableDiv = this.editableDivRef.nativeElement;
+        editableDiv.innerText = itemToUpdate.equation;
+      }
+    })
   }
 
 
@@ -42,11 +53,16 @@ export class CalculatorComponent {
       let value = math.evaluate(equation);
       value = value.toString()
       if (this.equation != value){
+        if (this.editHistoryMode){
+          this.removeItemFromHistory(this.itemToRemoved)
+          this.editHistoryMode = false
+          this.itemToRemoved ={}
+        }
         this.addToLocalStorage(this.equation,value)
       }
       return value.toString();
     } catch (error) {
-      this.result = 'Syntax Error!';
+      return 'Invalid Error!';
     }
   }
 
@@ -126,20 +142,33 @@ export class CalculatorComponent {
     let value = this.localStorageService.retrieve('history') || []
     let itemToInsert:any = { equation:equation, result:result }
 
-    //refusing push if itemToInsert already exists in history/value
-    const foundIndex = value.findIndex((obj:any, index:number) => {
-      if (JSON.stringify(obj) === JSON.stringify(itemToInsert)) {
-        return true;
+    if (value.length >0){
+      const lastInsertedItem = value[0]
+      if (JSON.stringify(lastInsertedItem) != JSON.stringify(itemToInsert)){
+        value.unshift(itemToInsert)
+        this.localStorageService.store('history',value)
       }
-      return false;
-    });
-
-    if (foundIndex == -1) {
+    }
+    else{
       value.unshift(itemToInsert)
       this.localStorageService.store('history',value)
     }
     
   }
     
+  removeItemFromHistory(itemToRemoved:any){
+    let arr = this.localStorageService.retrieve('history') || []
+    const foundIndex = arr.findIndex((obj:any, index:number) => {
+      if (JSON.stringify(obj) === JSON.stringify(itemToRemoved)) {
+        return true;
+      }
+      return false;
+    });
+
+    if (foundIndex != -1) {
+      arr.splice(foundIndex, 1);
+      this.localStorageService.store('history',arr)
+    }
+  }
 
 }

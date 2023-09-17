@@ -32,6 +32,10 @@
     align-items: center;
 }   
 
+.clear-history:hover{
+    color:#6e6e6e;
+}
+
 .hamburger{
     font-size: 20px;
     margin-right: 4px;

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
+import {SharedDetailsService}  from '../../shared-details.service'
 
 @Component({
   selector: 'app-history',
@@ -10,7 +11,7 @@ export class HistoryComponent {
   @Input() sidebarCollapsed!:boolean;
   historyItems:any =[]
 
-  constructor(private localStorageService:LocalStorageService){}
+  constructor(private localStorageService:LocalStorageService, private sharedDetailsService:SharedDetailsService ){}
 
   ngOnInit(){
     this.historyItems = this.getAllHistoryData()
@@ -25,5 +26,8 @@ export class HistoryComponent {
       return this.localStorageService.retrieve('history')
     }
   }
-  
+
+  editHistory(historyItem:any){
+    this.sharedDetailsService.changeItemToUpdate(historyItem)
+  }
 }

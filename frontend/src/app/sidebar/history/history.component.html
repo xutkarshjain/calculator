@@ -1,7 +1,7 @@
 <div class="container" [ngClass]="{'collapsed':sidebarCollapsed}">
     <div *ngIf="historyItems && historyItems.length; else noRecordFound">
         <div class="history" *ngFor="let historyItem of historyItems" >
-            <div class="record"  >
+            <div class="record"  (click)="editHistory(historyItem)">
                 <h6 class="equation">{{historyItem.equation}}</h6>
                 <h3 class="result">={{historyItem.result}}</h3>
             </div>

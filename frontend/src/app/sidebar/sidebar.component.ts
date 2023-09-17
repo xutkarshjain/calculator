@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage'; 
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +9,14 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
 
   sidebarCollapsed:boolean = false
+
+  constructor(private localStorageService:LocalStorageService){}
   
   toggleSidebar(){
     this.sidebarCollapsed = !this.sidebarCollapsed
+  }
+
+  clearHistory(){
+    this.localStorageService.clear('history')
   }
 }
